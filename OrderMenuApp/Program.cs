@@ -33,7 +33,7 @@ partial class MainProgram
         {
             AnsiConsole.Write(table);
 
-            Console.WriteLine("\nSelect an item. Only 1 to 5.");
+            Console.WriteLine("\nSelect an item by pressing 1 to 5.");
             ConsoleKey number;
             do
             {
@@ -67,8 +67,8 @@ partial class MainProgram
                 ConsoleKey.D5 or ConsoleKey.NumPad5 => 5,
             };
 
-            OrderDish.AddPrice(userChoice, orderTypeDictionary);
-            Console.WriteLine($"Total Amount: {OrderDish.AddingPriceToList.Sum():C}");
+            OrderDish.AddPriceToList(userChoice, orderTypeDictionary);
+            Console.WriteLine($"Total Amount: {OrderDish.AmountList.Sum():C}");
 
             Console.WriteLine("Press Any Key to continue ordering or ESC to stop ordering.");
             number = Console.ReadKey(intercept: true).Key;
