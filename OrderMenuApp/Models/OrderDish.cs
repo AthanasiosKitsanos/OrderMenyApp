@@ -5,13 +5,15 @@ namespace OrderMenuApp.Models;
 public class OrderDish
 {
     public static List<double> AddingPriceToList = new();
-    public static List<double> AddPrice(double dictValue)
+
+    // Adds the Dictionary Values into a List and then adds each value of the List
+    public static List<double> AddPrice(int userChoice, Dictionary<string, double> aDict)
     {
-        AddingPriceToList.Add(dictValue);
+        AddingPriceToList.Add(aDict.Values.ElementAt(userChoice - 1));
         double price = 0;
         foreach(double pr in AddingPriceToList)
         {
-            price += pr;
+             price += pr;
         }
         return AddingPriceToList;
     }
