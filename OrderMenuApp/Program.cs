@@ -43,7 +43,7 @@ partial class MainProgram
 
             AnsiConsole.Clear();
 
-            Dictionary<string, double> newList = number switch
+            Dictionary<string, double> orderTypeDictionary = number switch
             {
                 ConsoleKey.D1 or ConsoleKey.NumPad1 => pizza.ShowListOfSelection(),
                 ConsoleKey.D2 or ConsoleKey.NumPad2 => burger.ShowListOfSelection(),
@@ -67,12 +67,8 @@ partial class MainProgram
                 ConsoleKey.D5 or ConsoleKey.NumPad5 => 5,
             };
 
-            OrderDish.AddingPriceToList.Add(newList.Values.ElementAt(userChoice - 1));
-            //OrderDish.AddPrice();
-            foreach(double pr in OrderDish.AddingPriceToList)
-            {
-                Console.WriteLine(pr);
-            }
+            OrderDish.AddPrice(userChoice, orderTypeDictionary);
+            Console.WriteLine($"Total Amount: {OrderDish.AddingPriceToList.Sum():C}");
 
             Console.WriteLine("Press Any Key to continue ordering or ESC to stop ordering.");
             number = Console.ReadKey(intercept: true).Key;
@@ -80,7 +76,6 @@ partial class MainProgram
             {
                 break;
             }
-            //OrderDish.AddPrice(newList.Values);
             Console.Clear();
         }
 
