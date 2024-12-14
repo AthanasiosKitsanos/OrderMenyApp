@@ -21,7 +21,7 @@ public class Salad : ProductOrder
                     TypeOfProduct.Add("Chicken Ceasar's", 6.4);
                     break;
                 case 3:
-                    TypeOfProduct.Add("Vegetable Cobb", 7.5);
+                    TypeOfProduct.Add("Vegetable Cobb", 7.5); 
                     break;
                 case 4:
                     TypeOfProduct.Add("Chef", 6.1);

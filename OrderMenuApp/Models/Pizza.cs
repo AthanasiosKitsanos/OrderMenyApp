@@ -17,7 +17,7 @@ public class Pizza : ProductOrder
                     break;
                 case 2: TypeOfProduct.Add("Ceasar's", 9.9);
                     break;
-                case 3: TypeOfProduct.Add("Mexicana", 9.3);
+                case 3: TypeOfProduct.Add("Mexicana", 9.3); 
                     break;
                 case 4: TypeOfProduct.Add("Siciliana", 7.9);
                     break;

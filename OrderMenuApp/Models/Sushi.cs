@@ -24,7 +24,7 @@ public class Sushi : ProductOrder
                     TypeOfProduct.Add("Eel Nigiri", 6.9);
                     break;
                 case 4:
-                    TypeOfProduct.Add("Seabass Sashimi", 6.9);
+                    TypeOfProduct.Add("Seabass Sashimi", 6.9); 
                     break;
             }
         }
