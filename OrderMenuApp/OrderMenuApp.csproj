@@ -6,9 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.49.2-preview.0.69" />
+  </ItemGroup>
 	<ItemGroup>
-		<Using Include="System.IO.Path" Static="true"/>
-		<Using Include="System.Environment" Static="true"/>
+		<Using Include="System.IO.Path" Static="true" />
+		<Using Include="System.Environment" Static="true" />
 	</ItemGroup>
 
 </Project>
