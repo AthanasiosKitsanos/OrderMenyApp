@@ -42,6 +42,7 @@ public class Salad : ProductOrder
             table.AddRow($"{number}. {kvp.Key}", $"{kvp.Value:C}");
         }
         AnsiConsole.Write(table);
+        Console.WriteLine($"Select the type of {nameof(Salad)}.");
         return this.TypeOfProduct;
     }
 }

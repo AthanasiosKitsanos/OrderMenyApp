@@ -30,7 +30,7 @@ public class Burger : ProductOrder
         }
     }
 
-    public override Dictionary<string, double> ShowListOfSelection()
+    public override Dictionary<string, double> ShowListOfSelection() 
     {
         Table table = new Table();
         int number = 0;
@@ -42,6 +42,7 @@ public class Burger : ProductOrder
             table.AddRow($"{number}. {kvp.Key}", $"{kvp.Value:C}");
         }
         AnsiConsole.Write(table);
+        Console.WriteLine($"Select the type of {nameof(Burger)}.");
         return this.TypeOfProduct;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using OrderMenuApp.Models;
 using Spectre.Console;
+using Spectre.Console.Rendering;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OrderMenuApp;
@@ -25,34 +27,62 @@ partial class MainProgram
         sushi.AddToDict();
 
         Table table = new();
-        Createtable(table);
+        CreateTable(table);
 
-        AnsiConsole.Write(table);
-
-        Console.WriteLine("\nSelect an item.");
-        ConsoleKey number;
-        do
+        while (true)
         {
+            AnsiConsole.Write(table);
+
+            Console.WriteLine("\nSelect an item. Only 1 to 5.");
+            ConsoleKey number;
+            do
+            {
+                number = Console.ReadKey(intercept: true).Key;
+
+            }while(!CheckUserInput(number));
+
+            AnsiConsole.Clear();
+
+            Dictionary<string, double> newList = number switch
+            {
+                ConsoleKey.D1 or ConsoleKey.NumPad1 => pizza.ShowListOfSelection(),
+                ConsoleKey.D2 or ConsoleKey.NumPad2 => burger.ShowListOfSelection(),
+                ConsoleKey.D3 or ConsoleKey.NumPad3 => pasta.ShowListOfSelection(),
+                ConsoleKey.D4 or ConsoleKey.NumPad4 => salad.ShowListOfSelection(),
+                ConsoleKey.D5 or ConsoleKey.NumPad5 => sushi.ShowListOfSelection(),
+            };
+
+            do
+            {
+                number = Console.ReadKey(intercept: true).Key;
+
+            } while (!CheckUserInput(number));
+
+            int userChoice = number switch
+            {
+                ConsoleKey.D1 or ConsoleKey.NumPad1 => 1,
+                ConsoleKey.D2 or ConsoleKey.NumPad2 => 2,
+                ConsoleKey.D3 or ConsoleKey.NumPad3 => 3,
+                ConsoleKey.D4 or ConsoleKey.NumPad4 => 4,
+                ConsoleKey.D5 or ConsoleKey.NumPad5 => 5,
+            };
+
+            OrderDish.AddingPriceToList.Add(newList.Values.ElementAt(userChoice - 1));
+            //OrderDish.AddPrice();
+            foreach(double pr in OrderDish.AddingPriceToList)
+            {
+                Console.WriteLine(pr);
+            }
+
+            Console.WriteLine("Press Any Key to continue ordering or ESC to stop ordering.");
             number = Console.ReadKey(intercept: true).Key;
-            
-        } while(number != ConsoleKey.D1 && number != ConsoleKey.NumPad1 &&
-                number != ConsoleKey.D2 && number != ConsoleKey.NumPad2 &&
-                number != ConsoleKey.D3 && number != ConsoleKey.NumPad3 &&
-                number != ConsoleKey.D4 && number != ConsoleKey.NumPad4 &&
-                number != ConsoleKey.D5 && number != ConsoleKey.NumPad5);
-
-        AnsiConsole.Clear();
-
-        Dictionary<string, double> newList = number switch
-        {
-            ConsoleKey.D1 or ConsoleKey.NumPad1 => pizza.ShowListOfSelection(),
-            ConsoleKey.D2 or ConsoleKey.NumPad2 => burger.ShowListOfSelection(),
-            ConsoleKey.D3 or ConsoleKey.NumPad3 => pasta.ShowListOfSelection(),
-            ConsoleKey.D4 or ConsoleKey.NumPad4 => salad.ShowListOfSelection(),
-            ConsoleKey.D5 or ConsoleKey.NumPad5 => sushi.ShowListOfSelection(),
-        };
-        
-
+            if (number == ConsoleKey.Escape)
+            {
+                break;
+            }
+            //OrderDish.AddPrice(newList.Values);
+            Console.Clear();
+        }
 
     }
 }
