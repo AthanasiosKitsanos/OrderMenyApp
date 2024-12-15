@@ -67,13 +67,23 @@ partial class MainProgram
                 ConsoleKey.D5 or ConsoleKey.NumPad5 => 5,
             };
 
+            // This method takes the user's choice and adds it as a key in the dictionary, but if the key exists, it replaces it and updates the value.
+            Dictionary<string, double> ListOfOrderedDishes = OrderDish.BuildReceipt(userChoice, orderTypeDictionary);
+
+            Console.WriteLine("Running Order:");
+            DictionaryInfo(ListOfOrderedDishes);
+
+
+            // This method takes the user's choice, uses it as a value for the Dictionary and then add that value in a double type List
             OrderDish.AddPriceToList(userChoice, orderTypeDictionary);
-            Console.WriteLine($"Total Amount: {OrderDish.AmountList.Sum():C}");
+            Console.WriteLine($"Total Amount: {OrderDish.PriceList.Sum():C}");
 
             Console.WriteLine("Press Any Key to continue ordering or ESC to stop ordering.");
             number = Console.ReadKey(intercept: true).Key;
             if (number == ConsoleKey.Escape)
             {
+                Console.Clear();
+                FinalReceipt(ListOfOrderedDishes);
                 break;
             }
             Console.Clear();
