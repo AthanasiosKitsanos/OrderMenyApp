@@ -28,5 +28,22 @@ partial class MainProgram
         }
         return true;
     }
+
+    private static void DictionaryInfo(Dictionary<string, double> dictionary)
+    {
+        foreach(KeyValuePair<string, double> kvp in dictionary)
+        {
+            Console.WriteLine($"{kvp.Key}:  ${kvp.Value:F2}\n");
+        }
+    }
+
+    private static void FinalReceipt(Dictionary<string, double> someDict)
+    {
+        DateTime dateTime = DateTime.Now;
+        Console.WriteLine("Receipt:");
+        DictionaryInfo(someDict);
+        Console.WriteLine($"Total Amount: {OrderDish.PriceList.Sum():C}");
+        Console.WriteLine($"{dateTime:HH:mm:ss dd/MM/yyyy}");
+    }
 }
 
