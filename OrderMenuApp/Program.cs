@@ -10,21 +10,15 @@ namespace OrderMenuApp;
 
 partial class MainProgram
 {
+    private static Pizza pizza = new();
+    private static Burger burger = new();
+    private static Pasta pasta = new();
+    private static Salad salad = new();
+    private static Sushi sushi = new();
     static void Main(string[] args)
     {
         ConfigureConsole();
 
-        Pizza pizza = new();
-        Burger burger = new();
-        Pasta pasta = new();
-        Salad salad = new();
-        Sushi sushi = new();
-
-        pizza.AddToDict();
-        burger.AddToDict();
-        pasta.AddToDict();
-        salad.AddToDict();
-        sushi.AddToDict();
 
         Table table = new();
         CreateTable(table);
@@ -42,30 +36,18 @@ partial class MainProgram
             }while(!CheckUserInput(number));
 
             AnsiConsole.Clear();
-
-            Dictionary<string, double> orderTypeDictionary = number switch
-            {
-                ConsoleKey.D1 or ConsoleKey.NumPad1 => pizza.ShowListOfSelection(),
-                ConsoleKey.D2 or ConsoleKey.NumPad2 => burger.ShowListOfSelection(),
-                ConsoleKey.D3 or ConsoleKey.NumPad3 => pasta.ShowListOfSelection(),
-                ConsoleKey.D4 or ConsoleKey.NumPad4 => salad.ShowListOfSelection(),
-                ConsoleKey.D5 or ConsoleKey.NumPad5 => sushi.ShowListOfSelection(),
-            };
-
+            Dictionary<string, double> orderTypeDictionary = new();
+            orderTypeDictionary = ReturnDictionary(number, orderTypeDictionary);
+            
             do
             {
                 number = Console.ReadKey(intercept: true).Key;
 
             } while (!CheckUserInput(number));
 
-            int userChoice = number switch
-            {
-                ConsoleKey.D1 or ConsoleKey.NumPad1 => 1,
-                ConsoleKey.D2 or ConsoleKey.NumPad2 => 2,
-                ConsoleKey.D3 or ConsoleKey.NumPad3 => 3,
-                ConsoleKey.D4 or ConsoleKey.NumPad4 => 4,
-                ConsoleKey.D5 or ConsoleKey.NumPad5 => 5,
-            };
+            int userChoice = 0; 
+            userChoice = ReturnChoiceToInt(number, userChoice);
+            
 
             // This method takes the user's choice and adds it as a key in the dictionary, but if the key exists, it replaces it and updates the value.
             Dictionary<string, double> ListOfOrderedDishes = OrderDish.BuildReceipt(userChoice, orderTypeDictionary);
