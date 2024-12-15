@@ -16,7 +16,7 @@ public class OrderDish
     }
 
     // This method takes the user's choice and adds it as a key in the dictionary, but if the key exists, it replaces it and updates the value.
-    public static Dictionary<string, double> BuildReceipt(int userChoice, Dictionary<string, double> aDict)
+    public static Dictionary<string, double> BuildReceipt(int userChoice, Dictionary<string, double> aDict) 
     {
         string dishName = aDict.Keys.ElementAt(userChoice - 1);
         double dishPrice = aDict.Values.ElementAt(userChoice - 1);
