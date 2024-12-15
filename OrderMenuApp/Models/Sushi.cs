@@ -5,29 +5,16 @@ namespace OrderMenuApp.Models;
 
 public class Sushi : ProductOrder
 {
-    public override void AddToDict()
+    public Sushi()
     {
-        for (int i = 0; i < 5; i++)
+        TypeOfProduct = new Dictionary<string, double>
         {
-            switch (i)
-            {
-                case 0:
-                    TypeOfProduct.Add("Ocean Roll", 6.9);
-                    break;
-                case 1:
-                    TypeOfProduct.Add("Dragon Roll", 6.9);
-                    break;
-                case 2:
-                    TypeOfProduct.Add("Salamon Nigiri", 5.9);
-                    break;
-                case 3:
-                    TypeOfProduct.Add("Eel Nigiri", 6.9);
-                    break;
-                case 4:
-                    TypeOfProduct.Add("Seabass Sashimi", 6.9); 
-                    break;
-            }
-        }
+            {"Ocean Roll", 6.9},
+            {"Dragon Roll", 6.9},
+            {"Salamon Nigiri", 5.9},
+            {"Eel Nigiri", 6.9},
+            {"Seabass Sashimi", 6.9}
+        };
     }
 
     public override Dictionary<string, double> ShowListOfSelection()

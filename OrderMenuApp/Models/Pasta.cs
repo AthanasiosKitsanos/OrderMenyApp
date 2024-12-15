@@ -5,31 +5,18 @@ namespace OrderMenuApp.Models;
 
 public class Pasta : ProductOrder
 {
-    public override void AddToDict()
+    public Pasta()
     {
-        for (int i = 0; i < 5; i++)
+        TypeOfProduct = new Dictionary<string, double>
         {
-            switch (i)
-            {
-                case 0:
-                    TypeOfProduct.Add("Linguine Tartufata", 9.5);
-                    break;
-                case 1:
-                    TypeOfProduct.Add("Linguine Carbonara", 6.7);
-                    break;
-                case 2:
-                    TypeOfProduct.Add("Linguine Arrabbiata", 8.4);
-                    break;
-                case 3:
-                    TypeOfProduct.Add("Linguine Al Pesto", 8.5);
-                    break; 
-                case 4:
-                    TypeOfProduct.Add("Linguine Con Pollo a la Creme", 7.8);
-                    break;
-            }
-        }
+            {"Linguine Tartufata", 9.5},
+            {"Linguine Carbonara", 6.7},
+            {"Linguine Arrabbiata", 8.4},
+            {"Linguine Al Pesto", 8.5},
+            {"Linguine Con Pollo a la Creme", 7.8}
+        };
     }
-
+ 
     public override Dictionary<string, double> ShowListOfSelection()
     {
         Table table = new Table();

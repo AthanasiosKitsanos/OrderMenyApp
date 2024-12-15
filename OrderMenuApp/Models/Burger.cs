@@ -5,29 +5,16 @@ namespace OrderMenuApp.Models;
 
 public class Burger : ProductOrder
 {
-    public override void AddToDict()
+    public Burger()
     {
-        for (int i = 0; i < 5; i++) 
+        TypeOfProduct = new Dictionary<string, double>
         {
-            switch (i)
-            {
-                case 0:
-                    TypeOfProduct.Add("Humburger", 4.8);
-                    break;
-                case 1:
-                    TypeOfProduct.Add("Cheeseburger", 5.6);
-                    break;
-                case 2:
-                    TypeOfProduct.Add("Bacon Dream", 6.4);
-                    break;
-                case 3:
-                    TypeOfProduct.Add("Smokey BBQ", 6.4);
-                    break;
-                case 4:
-                    TypeOfProduct.Add("Chicken Avocado", 7.5);
-                    break;
-            }
-        }
+            {"Humburger", 4.8},
+            {"Cheeseburger", 5.6},
+            {"Bacon Dream", 6.4},
+            {"Smokey BBQ", 6.4},
+            {"Chicken Avocado", 7.5}
+        };
     }
 
     public override Dictionary<string, double> ShowListOfSelection() 
