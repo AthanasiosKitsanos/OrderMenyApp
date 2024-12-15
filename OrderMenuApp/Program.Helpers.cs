@@ -1,6 +1,7 @@
 ﻿using OrderMenuApp.Models;
 using Spectre.Console;
 using System;
+using System.IO;
 
 namespace OrderMenuApp;
 
@@ -44,6 +45,32 @@ partial class MainProgram
         DictionaryInfo(someDict);
         Console.WriteLine($"Total Amount: {OrderDish.PriceList.Sum():C}");
         Console.WriteLine($"{dateTime:HH:mm:ss dd/MM/yyyy}");
+    }
+
+    private static Dictionary<string, double> ReturnDictionary(ConsoleKey num, Dictionary<string, double> dictionary)
+    {
+        dictionary = num switch
+        {
+            ConsoleKey.D1 or ConsoleKey.NumPad1 => pizza.ShowListOfSelection(),
+            ConsoleKey.D2 or ConsoleKey.NumPad2 => burger.ShowListOfSelection(),
+            ConsoleKey.D3 or ConsoleKey.NumPad3 => pasta.ShowListOfSelection(),
+            ConsoleKey.D4 or ConsoleKey.NumPad4 => salad.ShowListOfSelection(),
+            ConsoleKey.D5 or ConsoleKey.NumPad5 => sushi.ShowListOfSelection()
+        };
+        return dictionary;
+    }
+
+    private static int ReturnChoiceToInt(ConsoleKey num, int userChoice)
+    {
+        userChoice = num switch
+        {
+            ConsoleKey.D1 or ConsoleKey.NumPad1 => 1,
+            ConsoleKey.D2 or ConsoleKey.NumPad2 => 2,
+            ConsoleKey.D3 or ConsoleKey.NumPad3 => 3,
+            ConsoleKey.D4 or ConsoleKey.NumPad4 => 4,
+            ConsoleKey.D5 or ConsoleKey.NumPad5 => 5,
+        };
+        return userChoice;
     }
 }
 
