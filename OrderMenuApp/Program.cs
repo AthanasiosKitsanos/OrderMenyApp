@@ -28,7 +28,7 @@ partial class MainProgram
             }
             else if (keyInfo.Key == ConsoleKey.Enter)
             {
-                DisplayTypeOfDishTable();
+                DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
                 lastExcecution = true;
             }
             else if(keyInfo.Key == ConsoleKey.Escape)
