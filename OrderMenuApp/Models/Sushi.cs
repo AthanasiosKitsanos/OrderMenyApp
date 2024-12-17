@@ -21,7 +21,7 @@ public class Sushi : ProductOrder
     {
         Table table = new Table();
         int number = 0;
-        table.AddColumn($"Type of {nameof(Pizza)}");
+        table.AddColumn($"Type of {nameof(Sushi)}");
         table.AddColumn("Prices");
         switch (index)
         {
