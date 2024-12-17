@@ -4,7 +4,7 @@ namespace OrderMenuApp.Models;
 
 public class OrderDish
 {
-    public static Dictionary<string, double> DetailedDictionary = new();
+    public static Dictionary<string, double> DetailedDictionary = new(); // Remember to change the name
 
     public static List<double> PriceList = new(); 
 
