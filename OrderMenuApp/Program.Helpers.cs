@@ -9,21 +9,21 @@ namespace OrderMenuApp;
 
 partial class MainProgram
 {
-    private static int currentItemIndex = 1;
-    private static int currentTableIndex = 1;
-    private static bool lastExcecution = false;
+    public static int currentItemIndex = 1;
+    public static int currentTableIndex = 1;
+    public static bool lastExcecution = false;
 
-    private static Table table = new();
-    private static Pizza pizza = new();
-    private static Burger burger = new();
-    private static Pasta pasta = new();
-    private static Salad salad = new();
-    private static Sushi sushi = new();
-    private static Dictionary<string, double> orderTypeDictionary = new();
-    private static Dictionary<string, double> ListOfOrderedDishes = new();
+    public static Table table = new();
+    public static Pizza pizza = new();
+    public static Burger burger = new();
+    public static Pasta pasta = new();
+    public static Salad salad = new();
+    public static Sushi sushi = new();
+    public static Dictionary<string, double> orderTypeDictionary = new();
+    public static Dictionary<string, double> ListOfOrderedDishes = new();
 
     // Creation of each Table of each Class
-    private static void CreatePizzaTable(Table table)
+    public static void CreatePizzaTable(Table table)
     {
         table = new();
         Console.Clear();
@@ -36,7 +36,7 @@ partial class MainProgram
         AnsiConsole.Write(table);
         Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
-    private static void CreateBurgerTable(Table table)
+    public static void CreateBurgerTable(Table table)
     {
         table = new();
         Console.Clear();
@@ -49,7 +49,7 @@ partial class MainProgram
         AnsiConsole.Write(table);
         Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
-    private static void CreatePastaTable(Table table)
+    public static void CreatePastaTable(Table table)
     {
         table = new();
         Console.Clear();
@@ -62,7 +62,7 @@ partial class MainProgram
         AnsiConsole.Write(table);
         Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
-    private static void CreateSaladTable(Table table)
+    public static void CreateSaladTable(Table table)
     {
         table = new();
         Console.Clear();
@@ -75,7 +75,7 @@ partial class MainProgram
         AnsiConsole.Write(table);
         Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
-    private static void CreateSushiTable(Table table)
+    public static void CreateSushiTable(Table table)
     {
         table = new();
         Console.Clear();
@@ -89,7 +89,7 @@ partial class MainProgram
         Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
 
-    private static void DictionaryInfo(Dictionary<string, double> dictionary)
+    public static void DictionaryInfo(Dictionary<string, double> dictionary)
     {
         foreach(KeyValuePair<string, double> kvp in dictionary)
         {
@@ -97,7 +97,7 @@ partial class MainProgram
         }
     }
 
-    private static void FinalReceipt(Dictionary<string, double> someDict)
+    public static void FinalReceipt(Dictionary<string, double> someDict)
     {
         DateTime dateTime = DateTime.Now;
         Console.WriteLine("Receipt:");
@@ -129,7 +129,7 @@ partial class MainProgram
         }
     }
 
-    private static void NavigateToNextTable()
+    public static void NavigateToNextTable()
     {
         if(currentTableIndex < 5)
         {
@@ -143,7 +143,7 @@ partial class MainProgram
         }
     }
 
-    private static void NavigateToPreviousTable()
+    public static void NavigateToPreviousTable()
     {
         if(currentTableIndex > 1)
         {
@@ -157,7 +157,7 @@ partial class MainProgram
         }
     }
 
-    private static void DisplayTypeOfDishTable(int tableindex, int itemindex) // Method that displays what each Class contains
+    public static void DisplayTypeOfDishTable(int tableindex, int itemindex) // Method that displays what each Class contains
     {
         Console.Clear();
         switch(tableindex)
@@ -181,7 +181,7 @@ partial class MainProgram
     }
 
     // Methods to navigate between each item, contained in a the Class
-    private static void NavTypeOfDishNext()
+    public static void NavTypeOfDishNext()
     {
         if (currentItemIndex < 5)
         {
@@ -195,7 +195,7 @@ partial class MainProgram
         }
     }
 
-    private static void NavTypeOfDishPrevious()
+    public static void NavTypeOfDishPrevious()
     {
         if (currentItemIndex > 1)
         {
@@ -209,38 +209,6 @@ partial class MainProgram
         }
     }
 
-    // Method that subscribes in the EventHandler and executes after the event was raised, to navigate 
-    private static void HandleKeyPress(ConsoleKeyInfo keyInfo)
-    {
-        if(keyInfo.Key == ConsoleKey.DownArrow)
-        {
-            NavTypeOfDishNext();
-        }
-        else if(keyInfo.Key == ConsoleKey.UpArrow)
-        {
-            NavTypeOfDishPrevious();
-        }
-        else if(keyInfo.Key == ConsoleKey.Enter)
-        {
-            
-        }
-        else if(keyInfo.Key == ConsoleKey.Escape)
-        {
-            currentItemIndex = 1;
-            Console.Clear();
-            CreateTableByIndex(currentTableIndex);
-            lastExcecution = false;
-        }
-        else if(keyInfo.Key == ConsoleKey.Q)
-        {
-            Console.Clear();
-            FinalReceipt(ListOfOrderedDishes);
-            Environment.Exit(0);
-        }
-
-    }
-
-
     public static async Task ListeningForKey()
     {
         while (true)
@@ -248,11 +216,11 @@ partial class MainProgram
             var key = await Task.Run(() => Console.ReadKey(true));
             if (!lastExcecution)
             {
-                HandlerOfEvents.OnKeyPressedOnMenu(key);
+                KeyEvents.OnKeyPressedOnMenu(key);
             }
             else
             {
-                HandleKeyPress(key);
+                KeyEvents.HandleKeyPress(key);
             }
         };
     }
