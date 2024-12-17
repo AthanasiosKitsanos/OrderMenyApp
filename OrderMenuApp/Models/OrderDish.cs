@@ -9,17 +9,17 @@ public class OrderDish
     public static List<double> PriceList = new(); 
 
     //Adds the Dictionary Values into a List and then adds each value of the List
-    public static List<double> AddPriceToList(int userChoice, Dictionary<string, double> aDict)
+    public static List<double> AddPriceToList(ConsoleKeyInfo userChoice, Dictionary<string, double> aDict)
     {
-        PriceList.Add(aDict.Values.ElementAt(userChoice - 1));
+        PriceList.Add(aDict.Values.ElementAt((int)userChoice.Key - 1));
         return PriceList;
     }
 
     // This method takes the user's choice and adds it as a key in the dictionary, but if the key exists, it replaces it and updates the value.
-    public static Dictionary<string, double> BuildReceipt(int userChoice, Dictionary<string, double> aDict) 
+    public static Dictionary<string, double> BuildReceipt(int num, Dictionary<string, double> aDict) 
     {
-        string dishName = aDict.Keys.ElementAt(userChoice -1);
-        double dishPrice = aDict.Values.ElementAt(userChoice - 1);
+        string dishName = aDict.Keys.ElementAt(num);
+        double dishPrice = aDict.Values.ElementAt(num);
 
         string? existingKey = DetailedDictionary.Keys.FirstOrDefault(key => key == dishName || key.EndsWith($"x {dishName}"));
 
