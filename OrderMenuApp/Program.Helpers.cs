@@ -21,6 +21,8 @@ partial class MainProgram
     private static Sushi sushi = new();
     private static Dictionary<string, double> orderTypeDictionary = new();
     private static Dictionary<string, double> ListOfOrderedDishes = new();
+
+    // Creation of each Table of each Class
     private static void CreatePizzaTable(Table table)
     {
         table = new();
@@ -104,6 +106,7 @@ partial class MainProgram
         Console.WriteLine($"{dateTime:HH:mm:ss dd/MM/yyyy}");
     }
 
+    // Navigation methods to move between rows of the Table of Classes
     public static void CreateTableByIndex(int tableindex)
     {
         switch (tableindex)
@@ -153,40 +156,42 @@ partial class MainProgram
             CreateTableByIndex(currentTableIndex);
         }
     }
-    private static void DisplayTypeOfDishTable()
+
+    private static void DisplayTypeOfDishTable(int tableindex, int itemindex) // Method that displays what each Class contains
     {
         Console.Clear();
-        switch(currentTableIndex)
+        switch(tableindex)
         {
             case 1:
-                pizza.ShowListOfSelection(currentItemIndex);
+                pizza.ShowListOfSelection(itemindex);
                 break;
             case 2:
-                burger.ShowListOfSelection(currentItemIndex);
+                burger.ShowListOfSelection(itemindex);
                 break;
             case 3:
-                pasta.ShowListOfSelection(currentItemIndex);
+                pasta.ShowListOfSelection(itemindex);
                 break;
             case 4:
-                salad.ShowListOfSelection(currentItemIndex);
+                salad.ShowListOfSelection(itemindex);
                 break;
             case 5:
-                sushi.ShowListOfSelection(currentItemIndex);
+                sushi.ShowListOfSelection(itemindex);
                 break;
         };
     }
 
+    // Methods to navigate between each item, contained in a the Class
     private static void NavTypeOfDishNext()
     {
         if (currentItemIndex < 5)
         {
             currentItemIndex++;
-            DisplayTypeOfDishTable();
+            DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
         }
         else if (currentItemIndex == 5)
         {
             currentItemIndex = 1;
-            DisplayTypeOfDishTable();
+            DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
         }
     }
 
@@ -195,15 +200,16 @@ partial class MainProgram
         if (currentItemIndex > 1)
         {
             currentItemIndex--;
-            DisplayTypeOfDishTable();
+            DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
         }
         else if (currentItemIndex == 1)
         {
             currentItemIndex = 5;
-            DisplayTypeOfDishTable();
+            DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
         }
     }
 
+    // Method that subscribes in the EventHandler and executes after the event was raised, to navigate 
     private static void HandleKeyPress(ConsoleKeyInfo keyInfo, Dictionary<string, double> currentMenu)
     {
         if(keyInfo.Key == ConsoleKey.DownArrow)
