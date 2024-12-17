@@ -210,7 +210,7 @@ partial class MainProgram
     }
 
     // Method that subscribes in the EventHandler and executes after the event was raised, to navigate 
-    private static void HandleKeyPress(ConsoleKeyInfo keyInfo, Dictionary<string, double> currentMenu)
+    private static void HandleKeyPress(ConsoleKeyInfo keyInfo)
     {
         if(keyInfo.Key == ConsoleKey.DownArrow)
         {
@@ -252,7 +252,7 @@ partial class MainProgram
             }
             else
             {
-                HandleKeyPress(key, orderTypeDictionary);
+                HandleKeyPress(key);
             }
         };
     }
