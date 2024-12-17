@@ -11,10 +11,5 @@ public static class HandlerOfEvents
     {
         KeyPress?.Invoke(null, keyinfo);
     }
-
-    public static void OnKeyPressedInTypes(ConsoleKeyInfo keyinfo)
-    {
-        KeyPress?.Invoke(null, keyinfo);
-    }
 }
 
