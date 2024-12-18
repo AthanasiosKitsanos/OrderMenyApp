@@ -34,7 +34,6 @@ partial class MainProgram
         table.AddRow($"4. {nameof(Salad)}");
         table.AddRow($"5. {nameof(Sushi)}");
         AnsiConsole.Write(table);
-        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
     public static void CreateBurgerTable(Table table)
     {
@@ -47,7 +46,6 @@ partial class MainProgram
         table.AddRow($"4. {nameof(Salad)}");
         table.AddRow($"5. {nameof(Sushi)}");
         AnsiConsole.Write(table);
-        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
     public static void CreatePastaTable(Table table)
     {
@@ -60,7 +58,6 @@ partial class MainProgram
         table.AddRow($"4. {nameof(Salad)}");
         table.AddRow($"5. {nameof(Sushi)}");
         AnsiConsole.Write(table);
-        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
     public static void CreateSaladTable(Table table)
     {
@@ -73,7 +70,6 @@ partial class MainProgram
         table.AddRow($"[underline]4. {nameof(Salad)}[/]");
         table.AddRow($"5. {nameof(Sushi)}");
         AnsiConsole.Write(table);
-        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
     public static void CreateSushiTable(Table table)
     {
@@ -86,14 +82,13 @@ partial class MainProgram
         table.AddRow($"4. {nameof(Salad)}");
         table.AddRow($"[underline]5. {nameof(Sushi)}[/]");
         AnsiConsole.Write(table);
-        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
 
-    public static void DictionaryInfo(Dictionary<string, double> dictionary)
+    public static void DictionaryInfo(Dictionary<string, double> someDict)
     {
-        foreach(KeyValuePair<string, double> kvp in dictionary)
+        foreach (KeyValuePair<string, double> kvp in someDict)
         {
-            Console.WriteLine($"{kvp.Key}:  ${kvp.Value:F2}\n");
+            Console.WriteLine($"\n{kvp.Key}: ${kvp.Value:F2}");
         }
     }
 
@@ -102,8 +97,15 @@ partial class MainProgram
         DateTime dateTime = DateTime.Now;
         Console.WriteLine("Receipt:");
         DictionaryInfo(someDict);
-        Console.WriteLine($"Total Amount: {OrderDish.PriceList.Sum():C}");
+        Console.WriteLine($"\nTotal Amount: {OrderDish.PriceList.Sum():C}");
         Console.WriteLine($"{dateTime:HH:mm:ss dd/MM/yyyy}");
+    }
+
+    public static void RunningOrder(Dictionary<string, double> someDict)
+    {
+        Console.WriteLine("\n---Cart---");
+        DictionaryInfo(someDict);
+        Console.WriteLine($"\nTotal Amount: {OrderDish.PriceList.Sum():C}");
     }
 
     // Navigation methods to move between rows of the Table of Classes
@@ -157,27 +159,18 @@ partial class MainProgram
         }
     }
 
-    public static void DisplayTypeOfDishTable(int tableindex, int itemindex) // Method that displays what each Class contains
+    public static Dictionary<string, double>DisplayTypeOfDishTable(int tableindex, int itemindex) // Method that displays what each Class contains
     {
         Console.Clear();
-        switch(tableindex)
+        orderTypeDictionary = tableindex switch
         {
-            case 1:
-                pizza.ShowListOfSelection(itemindex);
-                break;
-            case 2:
-                burger.ShowListOfSelection(itemindex);
-                break;
-            case 3:
-                pasta.ShowListOfSelection(itemindex);
-                break;
-            case 4:
-                salad.ShowListOfSelection(itemindex);
-                break;
-            case 5:
-                sushi.ShowListOfSelection(itemindex);
-                break;
+            1 => pizza.ShowListOfSelection(itemindex),
+            2 => burger.ShowListOfSelection(itemindex),
+            3 => pasta.ShowListOfSelection(itemindex),
+            4 => salad.ShowListOfSelection(itemindex),
+            5 => sushi.ShowListOfSelection(itemindex),
         };
+        return orderTypeDictionary;
     }
 
     // Methods to navigate between each item, contained in a the Class
@@ -207,6 +200,26 @@ partial class MainProgram
             currentItemIndex = 5;
             DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
         }
+    }
+
+    public static Dictionary<string, double> AddToListOfOrderedDishes(Dictionary<string, double> someDict)
+    {
+        ListOfOrderedDishes = someDict;
+        return ListOfOrderedDishes;
+    }
+
+    public static bool BuildReceiptCheck()
+    {
+        if(MainProgram.ListOfOrderedDishes.Count == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static void NavigationInfo()
+    {
+        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
     }
 
     public static async Task ListeningForKey()

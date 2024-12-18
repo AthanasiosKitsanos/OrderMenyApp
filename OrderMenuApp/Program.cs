@@ -15,6 +15,7 @@ partial class MainProgram
     {
         ConfigureConsole();
         CreatePizzaTable(table);
+        NavigationInfo();
 
         await Task.Run(() => ListeningForKey());
     }
