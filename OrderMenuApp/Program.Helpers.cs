@@ -220,7 +220,7 @@ partial class MainProgram
             }
             else
             {
-                KeyEvents.HandleKeyPress(key);
+                KeyEvents.OnKeyPressedOnList(key);
             }
         };
     }

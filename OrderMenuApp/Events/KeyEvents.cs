@@ -32,7 +32,7 @@ public class KeyEvents
             Environment.Exit(0);
         }
     }
-    public static void HandleKeyPress(ConsoleKeyInfo keyInfo)
+    public static void OnKeyPressedOnList(ConsoleKeyInfo keyInfo)
     {
         if (keyInfo.Key == ConsoleKey.DownArrow)
         {
