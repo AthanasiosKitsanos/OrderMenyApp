@@ -1,6 +1,7 @@
 ﻿using OrderMenuApp.Models;
 using System;
 using System.Threading.Tasks;
+using OrderMenuApp.StreamingManaging;
 
 namespace OrderMenuApp.Events;
 // A Class with methods to that navigate depending on the key the user presses.
@@ -43,8 +44,8 @@ public class KeyEvents
         }
         else if (keyInfo.Key == ConsoleKey.Q)
         {
-            Console.Clear();
-            MainProgram.FinalReceipt(MainProgram.ListOfOrderedDishes);
+            FileCreate.CreateNewFolder();
+            FileCreate.CreateNewFile();
             Environment.Exit(0);
         }
     }
@@ -92,6 +93,9 @@ public class KeyEvents
         {
             Console.Clear();
             MainProgram.FinalReceipt(MainProgram.ListOfOrderedDishes);
+
+            FileCreate.CreateNewFolder();
+            FileCreate.CreateNewFile();
             Environment.Exit(0);
         }
     }
