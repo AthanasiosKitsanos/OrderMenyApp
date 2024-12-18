@@ -22,7 +22,7 @@ public class KeyEvents
             MainProgram.NavigateToPreviousTable();
             if (MainProgram.BuildReceiptCheck())
             {
-                MainProgram.DictionaryInfo(MainProgram.ListOfOrderedDishes);
+                MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
             }
             MainProgram.NavigationInfo();
         }
