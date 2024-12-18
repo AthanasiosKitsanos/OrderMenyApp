@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OrderMenuApp.Models;
 
@@ -6,22 +7,23 @@ public class OrderDish
 {
     public static Dictionary<string, double> DetailedDictionary = new(); // Remember to change the name
 
-    public static List<double> PriceList = new(); 
+    public static List<double> PriceList = new();
 
     //Adds the Dictionary Values into a List and then adds each value of the List
-    public static List<double> AddPriceToList(ConsoleKeyInfo userChoice, Dictionary<string, double> aDict)
-    {
-        PriceList.Add(aDict.Values.ElementAt((int)userChoice.Key - 1));
+    public static List<double> AddPriceToList(int index, Dictionary<string, double> someDict)
+    { 
+        PriceList.Add(someDict.Values.ElementAt(index-1));
         return PriceList;
     }
 
     // This method takes the user's choice and adds it as a key in the dictionary, but if the key exists, it replaces it and updates the value.
-    public static Dictionary<string, double> BuildReceipt(int num, Dictionary<string, double> aDict) 
+    public static Dictionary<string, double> BuildReceipt(int num, Dictionary<string, double> someDict, Dictionary<string, double> newDict) 
     {
-        string dishName = aDict.Keys.ElementAt(num);
-        double dishPrice = aDict.Values.ElementAt(num);
-
-        string? existingKey = DetailedDictionary.Keys.FirstOrDefault(key => key == dishName || key.EndsWith($"x {dishName}"));
+        DetailedDictionary = someDict;
+        string dishName = DetailedDictionary.Keys.ElementAt(num-1);
+        double dishPrice = DetailedDictionary.Values.ElementAt(num-1);
+        
+        string? existingKey = newDict.Keys.FirstOrDefault(key => key == dishName || key.EndsWith($"x {dishName}"));
 
         if (existingKey is not null)
         {
@@ -34,13 +36,13 @@ public class OrderDish
             count++;
             string newKey = $"{count}x {dishName}";
 
-            DetailedDictionary.Remove(existingKey);
-            DetailedDictionary[newKey] = count * dishPrice;
+            newDict.Remove(existingKey);
+            newDict[newKey] = count * dishPrice;
         }
         else
         {
-            DetailedDictionary[dishName] = dishPrice;
+            newDict[dishName] = dishPrice;
         }
-        return DetailedDictionary;
+        return newDict;
     }
 }

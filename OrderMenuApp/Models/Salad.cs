@@ -21,8 +21,8 @@ public class Salad : ProductOrder
     {
         Table table = new Table();
         int number = 0;
-        table.AddColumn($"Type of {nameof(Salad)}");
-        table.AddColumn("Prices");
+        table.AddColumn($"[Yellow]Type of {nameof(Salad)}[/]");
+        table.AddColumn("[Yellow]Prices[/]");
         switch (index)
         {
             case 1:
@@ -98,7 +98,6 @@ public class Salad : ProductOrder
         }
         AnsiConsole.Write(table);
         Console.WriteLine($"Select the type of {nameof(Burger)}.");
-        Console.WriteLine("Navigate up and down with arrows. Press ENTER to select or Esc to go back or Q to stop ordering.");
         return this.TypeOfProduct;
     }
 }
