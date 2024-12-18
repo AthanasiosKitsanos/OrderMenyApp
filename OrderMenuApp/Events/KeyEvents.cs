@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderMenuApp.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace OrderMenuApp.Events;
@@ -10,15 +11,30 @@ public class KeyEvents
         if (keyInfo.Key == ConsoleKey.DownArrow)
         {
             MainProgram.NavigateToNextTable();
+            if (MainProgram.BuildReceiptCheck())
+            {
+                MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
+            }
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.UpArrow)
         {
             MainProgram.NavigateToPreviousTable();
+            if (MainProgram.BuildReceiptCheck())
+            {
+                MainProgram.DictionaryInfo(MainProgram.ListOfOrderedDishes);
+            }
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.Enter)
         {
             MainProgram.DisplayTypeOfDishTable(MainProgram.currentTableIndex, MainProgram.currentItemIndex);
             MainProgram.lastExcecution = true;
+            if (MainProgram.BuildReceiptCheck())
+            {
+                MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
+            }
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.Escape)
         {
@@ -37,14 +53,28 @@ public class KeyEvents
         if (keyInfo.Key == ConsoleKey.DownArrow)
         {
             MainProgram.NavTypeOfDishNext();
+            if (MainProgram.BuildReceiptCheck())
+            {
+                MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
+            }
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.UpArrow)
         {
             MainProgram.NavTypeOfDishPrevious();
+            if (MainProgram.BuildReceiptCheck())
+            {
+                MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
+            }
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.Enter)
         {
-            //DisplayTypeOfDishTable(currentTableIndex, currentItemIndex);
+            MainProgram.DisplayTypeOfDishTable(MainProgram.currentTableIndex, MainProgram.currentItemIndex);
+            OrderDish.BuildReceipt(MainProgram.currentItemIndex, MainProgram.orderTypeDictionary, MainProgram.ListOfOrderedDishes);
+            OrderDish.AddPriceToList(MainProgram.currentItemIndex, MainProgram.orderTypeDictionary);
+            MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.Escape)
         {
@@ -52,6 +82,11 @@ public class KeyEvents
             Console.Clear();
             MainProgram.CreateTableByIndex(MainProgram.currentTableIndex);
             MainProgram.lastExcecution = false;
+            if (MainProgram.BuildReceiptCheck())
+            {
+                MainProgram.RunningOrder(MainProgram.ListOfOrderedDishes);
+            }
+            MainProgram.NavigationInfo();
         }
         else if (keyInfo.Key == ConsoleKey.Q)
         {
