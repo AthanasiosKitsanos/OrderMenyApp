@@ -19,6 +19,8 @@ partial class MainProgram
     public static Pasta pasta = new();
     public static Salad salad = new();
     public static Sushi sushi = new();
+    public static DateTime dateTime = DateTime.Now;
+
     public static Dictionary<string, double> orderTypeDictionary = new();
     public static Dictionary<string, double> ListOfOrderedDishes = new();
 
@@ -94,7 +96,6 @@ partial class MainProgram
 
     public static void FinalReceipt(Dictionary<string, double> someDict)
     {
-        DateTime dateTime = DateTime.Now;
         Console.WriteLine("Receipt:");
         DictionaryInfo(someDict);
         Console.WriteLine($"\nTotal Amount: {OrderDish.PriceList.Sum():C}");
